@@ -7,7 +7,7 @@ import javax.swing.*;
 public class ViewHome extends JPanel {
     
     private JPanel panelHome;
-    public ImageIcon iconHome;
+    private ImageIcon iconHome;
 
     public ViewHome() {
         initComponents();
@@ -61,9 +61,9 @@ public class ViewHome extends JPanel {
                 
                 @Override
                 public void mouseClicked(MouseEvent e){
-                    //Abrir ventana a grado seleccionado. VISTA GAME
+                    //Abrir ventana con un indice. VISTA GAME
                     iconHome = new ImageIcon(getClass().getResource(path));
-                    //showGameView();
+                    //showGameView(index);
                 }
             });
         }
@@ -73,6 +73,17 @@ public class ViewHome extends JPanel {
         add(panelHome, BorderLayout.CENTER);  //Añadir panelHome en el centro de ViewHome
                        
     }
+    
+    /*
+    //Método para mostrar la vista de juego y ocultar la vista de inicio
+        private void showGameView(index) {
+            //Crea la vista Game
+            ViewGame vg = new ViewGame(int index);
+            jPanelHome.setVisible(false);
+            jPanelGame.setVisible(true);
+        }
+    }
+    */
     
     public static void main(String args[]) {
       new ViewHome().setVisible(true);

@@ -7,10 +7,11 @@ import javax.swing.*;
 public class MainView extends javax.swing.JFrame {
     
     private ImageIcon icon;
+    private JPanel jPanelHeader, jPanelHome, jPanelGame;
+    private JLabel bgLabel;
 
     public MainView() {
         initComponents();
-
     }
 
     private void initComponents() {
@@ -20,19 +21,18 @@ public class MainView extends javax.swing.JFrame {
         jPanelHome = new javax.swing.JPanel();
         jPanelGame = new javax.swing.JPanel();
         
-        setUndecorated(true);  //Eliminar barra de título y botones del sistema
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);  //Evitar el cierre
-        setExtendedState(JFrame.MAXIMIZED_BOTH);  //Maximizar la ventana a pantalla completa
+        //setUndecorated(true);  //Elimina barra de título y botones del sistema
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);  //Evita el cierre
+        setExtendedState(JFrame.MAXIMIZED_BOTH);  //Maximiza la ventana a pantalla completa
         setTitle("Launcher");
         setSize(1920, 1080);
-        setLocationRelativeTo(null);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanelHeader.setOpaque(false);
         jPanelHeader.setLayout(new GridLayout(1, 14, 5, 5));
         getContentPane().add(jPanelHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 1550, 130)); //Añade PanelSuperior al contenedor principal
 
-        //Crear un arreglo de JLabel con las imágenes que quieres mostrar
+        //Crea un arreglo de JLabel con las imágenes a mostrar
         String[] imagePaths = {
             "/images/LauncherButton0.png", "/images/LauncherButton1.png",
             "/images/LauncherButton2.png", "/images/LauncherButton3.png",
@@ -47,14 +47,14 @@ public class MainView extends javax.swing.JFrame {
         for (String path : imagePaths) {
             JLabel label = new JLabel();
             icon = new ImageIcon(getClass().getResource(path));
-            //Ajusta la imagen al tamaño del JLabel (85x85)
+            //Ajusta la imagen al tamaño del JLabel
             icon = new ImageIcon(icon.getImage().getScaledInstance(85, 85, java.awt.Image.SCALE_SMOOTH));
 
             label.setIcon(icon); //Establece la imagen en el JLabel
             label.setPreferredSize(new Dimension(85, 85));  //Establece tamaño fijo para el JLabel
             label.setHorizontalAlignment(JLabel.CENTER); //Centra la imagen dentro del JLabel
 
-            // Agregar el MouseListener para cambiar el estilo al pasar el mouse
+            //Agrega el MouseListener para resaltar las miniaturas al pasar el mouse
             label.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -66,7 +66,7 @@ public class MainView extends javax.swing.JFrame {
 
                 @Override
                 public void mouseExited(MouseEvent e) {
-                    //Restaura ícono original al salir el ratón
+                    //Restaura icono original al salir el ratón
                     icon = new ImageIcon(getClass().getResource(path));
                     icon = new ImageIcon(icon.getImage().getScaledInstance(85, 85, java.awt.Image.SCALE_SMOOTH));
                     label.setIcon(icon);
@@ -74,13 +74,13 @@ public class MainView extends javax.swing.JFrame {
                 
                 @Override
                 public void mouseClicked(MouseEvent e){
-                    //Abrir ventana a grado seleccionado. VISTA GAME
+                    //Abrir ventana a grado seleccionado. VISTA HOME
                     icon = new ImageIcon(getClass().getResource(path));
                     //showHomeView();
                 }
             });
 
-            jPanelHeader.add(label);  //Agregar el JLabel al PanelSuperior
+            jPanelHeader.add(label);  //Agrega el JLabel al PanelSuperior
         }
 
         jPanelHome.setOpaque(false);
@@ -94,11 +94,14 @@ public class MainView extends javax.swing.JFrame {
         bgLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Fondo base.png")));
         getContentPane().add(bgLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
                 
-        //Agregar jPanelGame y ocultarlo al inicio
+        //Agrega jPanelGame y lo oculta al inicio
         jPanelGame.setOpaque(false);
         getContentPane().add(jPanelGame, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 1550, 880));
         jPanelGame.setVisible(false); //Oculta la vista de juego al inicio
-                        
+        /*
+        ViewGame vg = new ViewGame();
+        jPanelGame.add(vh, BorderLayout.CENTER);
+        */          
         revalidate();
         repaint();
 
@@ -118,12 +121,9 @@ public class MainView extends javax.swing.JFrame {
         jPanelHome.setVisible(true);
     }
     */
+    
     public static void main(String[] args) {
         new MainView().setVisible(true);
     }
     
-    private javax.swing.JPanel jPanelHeader;
-    private javax.swing.JLabel bgLabel;
-    private javax.swing.JPanel jPanelHome;
-    private javax.swing.JPanel jPanelGame;
 }
