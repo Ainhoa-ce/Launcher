@@ -29,7 +29,8 @@ public class ImageCarousel extends JPanel {
 
         lArrow = new JLabel();
         lArrow.setIcon(new ImageIcon(getClass().getResource("/images/Flecha izquierda.png")));
-        lArrow.setBounds(150 - margenX - 60, (525/2), 60, 30);
+        lArrow.setHorizontalAlignment(JLabel.CENTER); //Centra la imagen dentro del JLabel
+        lArrow.setBounds(150 - margenX - 60, (525/2), 32, 45);
         add(lArrow);
 
         labelIzquierdo = new JLabel();
@@ -47,9 +48,9 @@ public class ImageCarousel extends JPanel {
         add(labelDerecho);
 
         rArrow = new JLabel();
-        rArrow.setBounds(150 + 891 + margenX, (525/2), 60, 30);
-        // Establecer las imágenes para los botones de navegación
         rArrow.setIcon(new ImageIcon(getClass().getResource("/images/Flecha derecha.png")));
+        rArrow.setHorizontalAlignment(JLabel.CENTER); //Centra la imagen dentro del JLabel
+        rArrow.setBounds(150 + 900 + margenX, (525 / 2), 32, 45);
         add(rArrow);
 
         //Carga la primera imagen
@@ -64,21 +65,28 @@ public class ImageCarousel extends JPanel {
         panelCircle.setBounds(150, 620, 900, 50); //Debajo del carrusel
         add(panelCircle);
 
-        // Agregar círculos para los indicadores
+        //Actualiza los circulos
         updateCircles();
 
-        // Añadir los listeners de los botones de navegación
         lArrow.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                lArrow.setPreferredSize(new Dimension(100, 100)); // Agrandar el botón
+                //Redimensiona la imagen
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Flecha izquierda.png"));
+                Image img = originalIcon.getImage().getScaledInstance(32, 45, Image.SCALE_SMOOTH);
+                lArrow.setIcon(new ImageIcon(img));
                 lArrow.revalidate();
+                lArrow.repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                lArrow.setPreferredSize(new Dimension(80, 80)); // Restaurar tamaño original
+                //Redimensiona la imagen a su tamaño original
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Flecha izquierda.png"));
+                Image img = originalIcon.getImage().getScaledInstance(22, 35, Image.SCALE_SMOOTH);
+                lArrow.setIcon(new ImageIcon(img));
                 lArrow.revalidate();
+                lArrow.repaint();
             }
 
             @Override
@@ -95,14 +103,22 @@ public class ImageCarousel extends JPanel {
         rArrow.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                rArrow.setPreferredSize(new Dimension(100, 100)); // Agrandar el botón
+                //Redimensiona la imagen
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Flecha derecha.png"));
+                Image img = originalIcon.getImage().getScaledInstance(32, 45, Image.SCALE_SMOOTH);
+                rArrow.setIcon(new ImageIcon(img));
                 rArrow.revalidate();
+                rArrow.repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                rArrow.setPreferredSize(new Dimension(80, 80)); // Restaurar tamaño original
+                //Redimensiona la imagen a su tamaño original
+                ImageIcon originalIcon = new ImageIcon(getClass().getResource("/images/Flecha derecha.png"));
+                Image img = originalIcon.getImage().getScaledInstance(22, 35, Image.SCALE_SMOOTH);
+                rArrow.setIcon(new ImageIcon(img));
                 rArrow.revalidate();
+                rArrow.repaint();
             }
 
             @Override
