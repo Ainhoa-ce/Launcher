@@ -8,6 +8,8 @@ public class ViewHome extends JPanel {
     
     private JPanel panelHome;
     private ImageIcon iconHome;
+    public int index = 0;
+    public MainView parent;
 
     public ViewHome() {
         initComponents();

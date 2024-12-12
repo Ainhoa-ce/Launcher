@@ -23,6 +23,7 @@ public class ImageCarousel extends JPanel {
     }
 
     public void initComponents() {
+        setBackground(new Color(10, 38, 72));
         setLayout(null);
         setSize(1550, 600);
         int margenX = 50; //Márgenes entre los botones y la imagen
@@ -30,27 +31,31 @@ public class ImageCarousel extends JPanel {
         lArrow = new JLabel();
         lArrow.setIcon(new ImageIcon(getClass().getResource("/images/Flecha izquierda.png")));
         lArrow.setHorizontalAlignment(JLabel.CENTER); //Centra la imagen dentro del JLabel
-        lArrow.setBounds(150 - margenX - 60, (525/2), 32, 45);
-        add(lArrow);
-
-        labelIzquierdo = new JLabel();
-        labelIzquierdo.setIcon(new ImageIcon(getClass().getResource("/images/Cuadrado fondo enfocado.png")));
-        add(labelIzquierdo);
-
+        lArrow.setBounds(150 - margenX - 60, 50+(525/2), 32, 45);
+        
         //Muestra la imagen
         labelImage = new JLabel();
         labelImage.setHorizontalAlignment(JLabel.CENTER);
         labelImage.setBounds(150, 100, 900, 500);
         add(labelImage);
+        add(lArrow);
+
+        labelIzquierdo = new JLabel();
+        labelIzquierdo.setIcon(new ImageIcon(getClass().getResource("/images/Cuadrado fondo enfocado.png")));
+        labelIzquierdo.setHorizontalAlignment(JLabel.LEFT);
+        labelIzquierdo.setBounds(120, 100, 900, 500);
+        add(labelIzquierdo);
 
         labelDerecho = new JLabel();
         labelDerecho.setIcon(new ImageIcon(getClass().getResource("/images/Cuadrado fondo enfocado.png")));
+        labelDerecho.setHorizontalAlignment(JLabel.RIGHT);
+        labelDerecho.setBounds(180, 100, 900, 500);
         add(labelDerecho);
 
         rArrow = new JLabel();
         rArrow.setIcon(new ImageIcon(getClass().getResource("/images/Flecha derecha.png")));
         rArrow.setHorizontalAlignment(JLabel.CENTER); //Centra la imagen dentro del JLabel
-        rArrow.setBounds(150 + 900 + margenX, (525 / 2), 32, 45);
+        rArrow.setBounds(150 + 900 + margenX, 50+(525 / 2), 32, 45);
         add(rArrow);
 
         //Carga la primera imagen
@@ -61,6 +66,7 @@ public class ImageCarousel extends JPanel {
         
         //Panel para los circulos
         panelCircle = new JPanel();
+        panelCircle.setBackground(new Color(10, 38, 72));
         panelCircle.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panelCircle.setBounds(150, 620, 900, 50); //Debajo del carrusel
         add(panelCircle);
@@ -137,6 +143,10 @@ public class ImageCarousel extends JPanel {
     private void actualizarImagen() {
         if (imagePaths != null && !imagePaths.isEmpty()) {
             icon = new ImageIcon(getClass().getResource(imagePaths.get(contador)));
+            
+            //Escala la imagen para que se ajuste al tamaño del label
+            Image img = icon.getImage().getScaledInstance(labelImage.getWidth(), labelImage.getHeight(), Image.SCALE_SMOOTH);
+            icon = new ImageIcon(img);
             labelImage.setIcon(icon);  //Actualiza la imagen en el JLabel
         }
     }
@@ -157,21 +167,7 @@ public class ImageCarousel extends JPanel {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> imagePaths = new ArrayList<>();
-        imagePaths.add("/images/Helicoptero0.png");
-        imagePaths.add("/images/Helicoptero1.png");
-        imagePaths.add("/images/Helicoptero2.png");
-        imagePaths.add("/images/Helicoptero3.png");
-        imagePaths.add("/images/Helicoptero4.png");
-
-        // Crear el carrusel y agregarlo a una ventana
-        JFrame frame = new JFrame("Carrusel de Imágenes");
-        ImageCarousel carousel = new ImageCarousel(imagePaths);
-        frame.setLayout(new BorderLayout());
-        frame.add(carousel, BorderLayout.CENTER);
-        frame.setSize(1200, 700);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+                
     }
 
 }

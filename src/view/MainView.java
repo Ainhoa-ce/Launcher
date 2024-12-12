@@ -9,9 +9,19 @@ public class MainView extends javax.swing.JFrame {
     private ImageIcon icon;
     private JPanel jPanelHeader, jPanelHome, jPanelGame;
     private JLabel bgLabel;
+    public int index = 0;
 
     public MainView() {
         initComponents();
+    }
+    
+    public final ViewHome CreateViewHome(int index){
+        ViewHome vh = new ViewHome();
+        vh.index = index;
+        vh.parent = this;
+        vh.setSize(jPanelHome.getSize()); //Devuleve el tamaño del contenedor
+        vh.setLocation(0, 0);
+        return(vh);
     }
 
     private void initComponents() {
@@ -105,6 +115,14 @@ public class MainView extends javax.swing.JFrame {
         revalidate();
         repaint();
 
+    }
+    
+    //Evento de los escudos, hacer bucle for con @Override para sobreescribir eventos MOUSECLICKED
+    private void escudo1MouseClicked (java.awt.event.MouseEvent evt){
+        ViewHome vh = CreateViewHome(0);
+    }
+    private void escudo2MouseClicked (java.awt.event.MouseEvent evt){
+        ViewHome vh = CreateViewHome(1);
     }
     
     
